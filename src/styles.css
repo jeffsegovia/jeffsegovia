@@ -1,0 +1,231 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+/* shadcn/ui, neutral base colour. */
+:root {
+  --radius: 0rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  /* A shade darker than shadcn's 0.556 so small grey text clears 4.5:1 on
+   * the muted surface as well as on white. */
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  /* The one accent: signal blue, like an oscilloscope trace. 5.2:1 on white. */
+  --brand: #2563eb;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  /* 8.3:1 on the dark background. */
+  --brand: #7aa7ff;
+}
+
+@theme inline {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply scroll-pt-20;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+  :focus-visible {
+    @apply outline-brand outline-2 outline-offset-2;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Long-form text: posts, snippets, project write-ups. */
+@utility prose-site {
+  @apply prose prose-neutral dark:prose-invert max-w-none;
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--foreground);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-quotes: var(--muted-foreground);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-hr: var(--border);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+  font-size: 1.03125rem;
+  line-height: 1.8;
+
+  & :where(h2, h3, h4) {
+    @apply scroll-mt-24 font-semibold tracking-tight;
+  }
+  & :where(h2) {
+    @apply mt-12 mb-4 text-[1.375rem];
+  }
+  & :where(h3) {
+    @apply mt-8 mb-3 text-lg;
+  }
+  & a.heading-anchor {
+    @apply font-[inherit] no-underline;
+  }
+  & a:not(.heading-anchor) {
+    @apply decoration-muted-foreground/60 hover:decoration-brand underline-offset-4 transition-colors;
+  }
+  & :where(blockquote) {
+    @apply border-l-2 font-normal not-italic;
+  }
+  & :where(blockquote p)::before,
+  & :where(blockquote p)::after {
+    content: none;
+  }
+  & :where(img) {
+    @apply rounded-lg border;
+  }
+  /* Inline code. */
+  & :where(:not(pre) > code) {
+    @apply bg-muted rounded-md px-1.5 py-0.5 font-mono text-[0.875em] font-normal;
+  }
+  & :where(:not(pre) > code)::before,
+  & :where(:not(pre) > code)::after {
+    content: none;
+  }
+  & :where(pre) {
+    @apply m-0 rounded-none bg-transparent p-0 text-[0.84375rem] leading-[1.7] text-inherit;
+  }
+}
+
+/* Code blocks from rehype-pretty-code (github-light / github-dark-dimmed). */
+/* The figure's spacing comes from the copy-button wrapper (code-block.tsx). */
+figure[data-rehype-pretty-code-figure] {
+  @apply my-0;
+}
+figure[data-rehype-pretty-code-figure] pre {
+  @apply overflow-x-auto py-4;
+}
+figure[data-rehype-pretty-code-figure] code {
+  @apply grid min-w-full font-mono;
+  counter-reset: line;
+}
+figure[data-rehype-pretty-code-figure] [data-line] {
+  @apply px-4;
+}
+figure[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply text-muted-foreground/70 mr-5 inline-block w-4 text-right select-none;
+}
+figure[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  @apply bg-muted;
+}
+[data-rehype-pretty-code-title] {
+  @apply text-muted-foreground bg-muted/40 mt-6 border border-b-0 px-4 py-2 font-mono text-xs;
+}
+[data-rehype-pretty-code-title] + div {
+  @apply mt-0;
+}
+code[data-theme*=' '] span {
+  color: var(--shiki-light);
+}
+.dark code[data-theme*=' '] span {
+  color: var(--shiki-dark);
+}
+
+/* Audio player example (building-an-audio-player-with-reactjs). */
+.progress-bar {
+  --progress-width: 0;
+  --buffered-width: 0;
+}
+.progress-bar::-webkit-slider-thumb {
+  z-index: 4;
+  position: relative;
+}
+.progress-bar::before {
+  transform: scaleX(var(--progress-width));
+  z-index: 3;
+}
+.progress-bar::after {
+  transform: scaleX(var(--buffered-width));
+  transform-origin: left;
+  z-index: 2;
+}
