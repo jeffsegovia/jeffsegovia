@@ -21,7 +21,7 @@ export function Pre(props: React.ComponentProps<'pre'>) {
             // Clipboard blocked: nothing to do.
           }
         }}
-        className="bg-background text-muted-foreground hover:text-foreground absolute top-2 right-2 flex size-8 items-center justify-center border opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
+        className="bg-background text-muted-foreground hover:text-foreground absolute top-2 right-2 flex size-8 items-center justify-center border transition-colors"
         aria-label={copied ? 'Copied' : 'Copy code'}
       >
         {copied ? (
