@@ -190,7 +190,9 @@ figure[data-rehype-pretty-code-figure] code {
 figure[data-rehype-pretty-code-figure] [data-line] {
   @apply px-4;
 }
-figure[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
+figure[data-rehype-pretty-code-figure]
+  code[data-line-numbers]
+  > [data-line]::before {
   counter-increment: line;
   content: counter(line);
   @apply text-muted-foreground/70 mr-5 inline-block w-4 text-right select-none;
