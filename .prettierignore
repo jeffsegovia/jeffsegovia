@@ -3,3 +3,4 @@ content/**
 src/routeTree.gen.ts
 .output
 dist
+.vercel
